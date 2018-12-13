@@ -1,6 +1,5 @@
 require 'zip'
 require 'open-uri'
-require 'byebug'
 
 task :load_lc_dataset  do
   DATASET_URL = 'https://resources.lendingclub.com/LoanStats_2018Q3.csv.zip'
@@ -52,7 +51,6 @@ task :load_lc_dataset  do
       COPY #{table_name}(#{columns.join(', ')})
       FROM STDIN DELIMITER ',' CSV HEADER ;
     SQL
-    #byebug
     rc.exec(sql)
     rc.put_copy_data(file_contents)
     rc.put_copy_end
